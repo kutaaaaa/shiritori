@@ -15,6 +15,7 @@
   <!-- 次の文字を入力するフォーム -->
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
+  <button id="resetSendButton">リセット</button>
 
   <!-- JavaScriptを実行 -->
   <script>
@@ -48,6 +49,8 @@
 
       // status: 200以外が返ってきた場合にエラーを表示
       if (response.status !== 200) {
+        // errorObj["errorCode"]ごとに処理を分岐する
+        // errorCodeが、末尾が「ん」の時のエラーだったら、ゲームを終了する
         const errorJson = await response.text();
         const errorObj = JSON.parse(errorJson);
         alert(errorObj["errorMessage"]);
@@ -61,6 +64,12 @@
       // inputタグの中身を消去する
       nextWordInput.value = "";
     }
+
+    // 送信ボタンの押下時に実行
+     document.querySelector("#resetSendButton").onclick = async(event) => {
+       // POST /resetを実行
+       // ページをリロードする
+     }
   </script>
 </body>
 
